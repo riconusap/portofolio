@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, type PropType } from 'vue'
-import type { ButtonProps, ButtonVariant, ButtonSize } from '@/types'
+import type { ButtonVariant, ButtonSize } from '@/types'
 
 export default defineComponent({
   name: 'GlassButton',
@@ -52,7 +52,7 @@ export default defineComponent({
     }
   },
   emits: ['click'],
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const componentTag = computed(() => {
       if (props.href) return 'a'
       if (props.to) return 'router-link'
@@ -72,7 +72,7 @@ export default defineComponent({
     const iconClasses = computed(() => [
       'button-icon',
       {
-        'button-icon--only': !props.$slots.default
+        'button-icon--only': !slots.default
       }
     ])
 

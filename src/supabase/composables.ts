@@ -5,8 +5,6 @@ import type { Database } from './types'
 type Portfolio = Database['public']['Tables']['portfolios']['Row']
 type Project = Database['public']['Tables']['projects']['Row']
 type Skill = Database['public']['Tables']['skills']['Row']
-type Experience = Database['public']['Tables']['experiences']['Row']
-type SocialLink = Database['public']['Tables']['social_links']['Row']
 
 export const useSupabase = () => {
   const loading = ref(false)
@@ -235,7 +233,7 @@ export const useSupabase = () => {
       error.value = null
       
       try {
-        const { data, error: storageError } = await supabase.storage
+        const { error: storageError } = await supabase.storage
           .from(bucket)
           .upload(path, file)
         

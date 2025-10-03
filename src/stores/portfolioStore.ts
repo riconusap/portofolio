@@ -15,6 +15,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     linkedin: 'https://linkedin.com/in/yourusername',
     twitter: 'https://twitter.com/yourusername',
     profileImage: '',
+    resume: '', // CV/Resume download link
     bio: 'I am a passionate full-stack developer with expertise in modern web technologies. I love creating beautiful, functional, and user-friendly applications that solve real-world problems.',
     yearsOfExperience: 5,
     projectsCompleted: 50,
@@ -246,6 +247,37 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     experience.value.filter(exp => exp.current)
   )
 
+  const socialLinks = computed(() => [
+    {
+      id: 'github',
+      name: 'GitHub',
+      url: personalInfo.value.github,
+      icon: '💻',
+      visible: !!personalInfo.value.github
+    },
+    {
+      id: 'linkedin',
+      name: 'LinkedIn',
+      url: personalInfo.value.linkedin,
+      icon: '💼',
+      visible: !!personalInfo.value.linkedin
+    },
+    {
+      id: 'twitter',
+      name: 'Twitter',
+      url: personalInfo.value.twitter,
+      icon: '🐦',
+      visible: !!personalInfo.value.twitter
+    },
+    {
+      id: 'website',
+      name: 'Website',
+      url: personalInfo.value.website,
+      icon: '🌐',
+      visible: !!personalInfo.value.website
+    }
+  ].filter(link => link.visible))
+
   // Actions
   const updatePersonalInfo = (info: any) => {
     personalInfo.value = { ...personalInfo.value, ...info }
@@ -295,6 +327,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     featuredProjects,
     skillsByCategory,
     currentExperience,
+    socialLinks,
     
     // Actions
     updatePersonalInfo,

@@ -113,7 +113,7 @@ export const useForm = <T extends Record<string, any>>(initialValues: T) => {
 
   const getFormValues = () => {
     return Object.keys(formState).reduce((acc, key) => {
-      acc[key] = formState[key].value
+      (acc as any)[key] = formState[key].value
       return acc
     }, {} as T)
   }
