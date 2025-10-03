@@ -4,7 +4,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-ADD .env.prod .env
 RUN npm run build --optimize-for-size
 
 # * production stage
