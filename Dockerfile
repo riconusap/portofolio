@@ -10,7 +10,7 @@ RUN npm run build --optimize-for-size
 FROM nginx:stable-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 
-WORKDIR /usr/share/nginx/html/
+WORKDIR /var/www/riconusap.tech
 RUN rm -rf ./*
 COPY --from=builder /app/dist ./portofolio
 EXPOSE 3000
