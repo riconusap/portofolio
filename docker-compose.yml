@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
     container_name: vue-portfolio
     networks:
-      - portfolio-network
+      - riknus-networks
 
   # Optional: Add development service
   portfolio-dev:
@@ -29,10 +29,12 @@ services:
     restart: unless-stopped
     container_name: vue-portfolio-dev
     networks:
-      - portfolio-network
+      - riknus-networks
     profiles:
       - dev
 
 networks:
-  portfolio-network:
-    driver: bridge
+    riknus-networks:
+        driver: bridge
+        name: riknus-networks
+        external: true

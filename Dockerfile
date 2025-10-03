@@ -25,7 +25,7 @@ COPY --from=build-stage /app/dist /usr/share/nginx/html
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Expose port 80
+# Expose port 3000
 EXPOSE 3000
 
 # Start nginx
