@@ -1,32 +1,17 @@
-# Use Node.js 18 Alpine as base image
-FROM node:18-alpine as build-stage
-
-# Set working directory
+# * build stage
+FROM node:22.12.0-alpine AS builder
 WORKDIR /app
-
-# Copy package files
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
-
-# Copy source code
 COPY . .
+ADD .env.prod .env
+RUN npm run build --optimize-for-size
 
-# Build the application
-RUN npm run build
-
-# Production stage
-FROM nginx:alpine as production-stage
-
-# Copy built files from build stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
-
-# Copy nginx configuration
+# * production stage
+FROM nginx:stable-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Expose port 3000
+WORKDIR /usr/share/nginx/html/
+RUN rm -rf ./*
+COPY --from=builder /app/dist ./admin
 EXPOSE 3000
-
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
