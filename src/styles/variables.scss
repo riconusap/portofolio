@@ -1,0 +1,30 @@
+// Variables for black and white glassmorphism design
+:root {
+  --glass-primary: rgba(255, 255, 255, 0.15);
+  --glass-secondary: rgba(255, 255, 255, 0.08);
+  --glass-dark: rgba(0, 0, 0, 0.3);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-border-dark: rgba(0, 0, 0, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --glass-shadow-sm: 0 4px 16px 0 rgba(0, 0, 0, 0.25);
+  --glass-shadow-light: 0 8px 32px 0 rgba(255, 255, 255, 0.1);
+  
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --text-dark: #000000;
+  --text-dark-secondary: rgba(0, 0, 0, 0.8);
+  --text-dark-muted: rgba(0, 0, 0, 0.6);
+  
+  --accent-primary: #ffffff;
+  --accent-secondary: #000000;
+  --accent-gradient: linear-gradient(135deg, #ffffff, #f0f0f0);
+  --accent-gradient-dark: linear-gradient(135deg, #333333, #000000);
+  
+  --blur-sm: 8px;
+  --blur-md: 12px;
+  --blur-lg: 16px;
+  --blur-xl: 20px;
+  
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

@@ -1,0 +1,204 @@
+// Black and white glassmorphism mixins
+@mixin glass-card($opacity: 0.15, $blur: var(--blur-md), $border-opacity: 0.2) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid rgba(255, 255, 255, $border-opacity);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+}
+
+@mixin glass-card-dark($opacity: 0.3, $blur: var(--blur-md), $border-opacity: 0.2) {
+  background: rgba(0, 0, 0, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid rgba(0, 0, 0, $border-opacity);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow-light);
+}
+
+@mixin glass-card-sm($opacity: 0.08, $blur: var(--blur-sm)) {
+  @include glass-card($opacity, $blur, 0.15);
+  box-shadow: var(--glass-shadow-sm);
+  border-radius: 12px;
+}
+
+@mixin glass-card-lg($opacity: 0.2, $blur: var(--blur-lg)) {
+  @include glass-card($opacity, $blur, 0.25);
+  border-radius: 20px;
+}
+
+@mixin glass-button($opacity: 0.15, $blur: var(--blur-sm)) {
+  @include glass-card($opacity, $blur, 0.3);
+  transition: var(--transition);
+  cursor: pointer;
+  border-radius: 12px;
+  
+  &:hover {
+    background: rgba(255, 255, 255, $opacity + 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@mixin glass-button-dark($opacity: 0.25) {
+  @include glass-card-dark($opacity, var(--blur-sm), 0.3);
+  transition: var(--transition);
+  cursor: pointer;
+  border-radius: 12px;
+  
+  &:hover {
+    background: rgba(0, 0, 0, $opacity + 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px 0 rgba(255, 255, 255, 0.2);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@mixin glass-input($opacity: 0.1) {
+  @include glass-card($opacity, var(--blur-sm), 0.2);
+  transition: var(--transition);
+  
+  &:focus {
+    background: rgba(255, 255, 255, $opacity + 0.05);
+    border-color: rgba(255, 255, 255, 0.6);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+  }
+}
+
+@mixin gradient-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+@mixin gradient-text-dark {
+  background: var(--accent-gradient-dark);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+@mixin glass-overlay {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border-radius: inherit;
+    pointer-events: none;
+  }
+}
+
+@mixin glass-overlay-dark {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+    border-radius: inherit;
+    pointer-events: none;
+  }
+}
+
+// Animation mixins
+@mixin fade-in-up($delay: 0s) {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-delay: $delay;
+}
+
+@mixin fade-in-left($delay: 0s) {
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: fadeInLeft 0.8s ease-out forwards;
+  animation-delay: $delay;
+}
+
+@mixin fade-in-right($delay: 0s) {
+  opacity: 0;
+  transform: translateX(30px);
+  animation: fadeInRight 0.8s ease-out forwards;
+  animation-delay: $delay;
+}
+
+// Responsive mixins
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 769px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,114 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+// Import variables and mixins
+@import './variables.scss';
+@import './mixins.scss';
+
+// Global glassmorphism styles
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 50%, #2a2a2a 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+// Global glass components
+.glass-card {
+  @include glass-card();
+}
+
+.glass-card-sm {
+  @include glass-card-sm();
+}
+
+.glass-card-lg {
+  @include glass-card-lg();
+}
+
+.glass-card-dark {
+  @include glass-card-dark();
+}
+
+.glass-button {
+  @include glass-button();
+}
+
+.glass-button-dark {
+  @include glass-button-dark();
+}
+
+.glass-input {
+  @include glass-input();
+}
+
+.gradient-text {
+  @include gradient-text();
+}
+
+.gradient-text-dark {
+  @include gradient-text-dark();
+}
+
+// Utility classes
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.backdrop-blur-glass {
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+}
+
+// Animation classes
+.animate-fade-in-up {
+  @include fade-in-up();
+}
+
+.animate-fade-in-left {
+  @include fade-in-left();
+}
+
+.animate-fade-in-right {
+  @include fade-in-right();
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-custom {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+}
