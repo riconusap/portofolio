@@ -6,9 +6,19 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:80"  # Direct port 80 for production
+      - "3000:80"
     environment:
       - NODE_ENV=production
     restart: unless-stopped
-    container_name: vue-portfolio-prod
-    # Remove external network dependency for simpler deployment
+    container_name: vue-portfolio
+    networks:
+      - riknus-networks
+      - nginx-proxy_proxy-network
+
+networks:
+  riknus-networks:
+    driver: bridge
+    name: riknus-networks
+    external: true
+  nginx-proxy_proxy-network:
+    external: true

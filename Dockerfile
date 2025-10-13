@@ -1,24 +1,27 @@
-# * build stage
-FROM node:18-alpine AS builder
+# ~/docker-apps/vue-frontend/Dockerfile
+FROM node:18-alpine as build-stage
+
 WORKDIR /app
+
+# Copy package files
 COPY package*.json ./
 RUN npm install
+
+# Copy source code
 COPY . .
+
+# Build the app
 RUN npm run build
 
-# * production stage
-FROM nginx:alpine
-# Create the target directory structure
-RUN mkdir -p /var/www/riconusap.tech/portofolioServe
+# Production stage
+FROM nginx:alpine as production-stage
+
+# Copy built app
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
 # Copy nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy built files to the portofolioServe folder
-COPY --from=builder /app/dist /var/www/riconusap.tech/portofolioServe
-
-# Expose port 3000
 EXPOSE 3000
 
-# Start nginx
 CMD ["nginx", "-g", "daemon off;"]

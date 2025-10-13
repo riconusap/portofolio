@@ -1,20 +1,7 @@
+# Development Environment
 version: '3.8'
 
 services:
-  portfolio:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-    restart: unless-stopped
-    container_name: vue-portfolio
-    networks:
-      - riknus-networks
-
-  # Optional: Add development service
   portfolio-dev:
     build:
       context: .
@@ -26,15 +13,6 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
-    restart: unless-stopped
+      - VITE_HOST=0.0.0.0
     container_name: vue-portfolio-dev
-    networks:
-      - riknus-networks
-    profiles:
-      - dev
-
-networks:
-    riknus-networks:
-        driver: bridge
-        name: riknus-networks
-        external: true
+    command: npm run dev
